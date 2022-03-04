@@ -1,10 +1,23 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Cocona;
 
 namespace EasyCli;
 
 public class Program
 {
+    #region Debugging helper method
+    [Conditional("DEBUG")]
+    public static void AllowDebugIfSelected(bool? debug)
+    {
+        if (debug.HasValue && debug.Value)
+        {
+            Console.WriteLine($"Attach debugger to process with Id {Environment.ProcessId} ({Process.GetCurrentProcess().ProcessName}). Press any key to continue...");
+            Console.ReadKey(true);
+        }
+    }
+    #endregion
+
     public static void Main(string[] args)
     {
         // Create app builder and build application class from Cocona library
@@ -34,8 +47,12 @@ public class Program
                 [Argument(Name = "Augend", Description = "Augend")]
                 double x,
                 [Argument(Name = "Addend", Description = "Addend")]
-                double y) =>
+                double y,
+                bool? debug) =>
             {
+                // Custom helper method to allow debugging. See README.md file for more information
+                AllowDebugIfSelected(debug);
+
                 // Use class from Calculator.cs file to calculate output
                 var calculator = new Calculator();
                 var output = calculator.Add(x, y);
@@ -47,8 +64,12 @@ public class Program
             commandsBuilder.AddCommand("sum", (
                 // Define parameters as argument with name and description (default is option) using attribute
                 [Argument(Name = "numbers", Description = "Numbers to sum")]
-                double[] numbers) =>
+                double[] numbers,
+                bool? debug) =>
             {
+                // Custom helper method to allow debugging. See README.md file for more information
+                AllowDebugIfSelected(debug);
+
                 // Use class from Calculator.cs file to calculate output
                 var calculator = new Calculator();
                 var output = calculator.Add(numbers);
@@ -76,8 +97,12 @@ public class Program
                 [Argument(Name = "Minuend", Description = "Minuend")]
                 double x,
                 [Argument(Name = "Subtrahend", Description = "Subtrahend")]
-                double y) =>
+                double y, 
+                bool? debug) =>
             {
+                // Custom helper method to allow debugging. See README.md file for more information
+                AllowDebugIfSelected(debug);
+
                 // Use class from Calculator.cs file to calculate output
                 var calculator = new Calculator();
                 var output = calculator.Subtract(x, y);
@@ -91,8 +116,12 @@ public class Program
                 [Argument(Name = "Multiplier", Description = "Multiplier")]
                 double x,
                 [Argument(Name = "Multiplicand", Description = "Multiplicand")]
-                double y) =>
+                double y, 
+                bool? debug) =>
             {
+                // Custom helper method to allow debugging. See README.md file for more information
+                AllowDebugIfSelected(debug);
+
                 // Use class from Calculator.cs file to calculate output
                 var calculator = new Calculator();
                 var output = calculator.Multiply(x, y);
@@ -106,8 +135,12 @@ public class Program
                 [Argument(Name = "Dividend", Description = "Dividend")]
                 double x,
                 [Argument(Name = "Divisor", Description = "Divisor")]
-                double y) =>
+                double y, 
+                bool? debug) =>
             {
+                // Custom helper method to allow debugging. See README.md file for more information
+                AllowDebugIfSelected(debug);
+
                 // Use try/catch that catches DivideByZeroException (if user tries to divide by 0)
                 try
                 {
