@@ -37,7 +37,7 @@ For example, debugging addition using Windows PowerShell woud look like this:
 Application will print message that contains process Id and name to look for when attaching debugger:
 `Attach debugger to process with Id 33976 (EasyCli). Press any key to continue...`
 
-To attach debugger using Visual Studio go to *Debug -> Attach to process..., look for EasyCli process in *Available processes* list, click *Attach* and *voilà*, you are debugging your application. Now you can come back to your app, press any key to continue and debugger will pause execution on breakpoints!
+To attach debugger using Visual Studio go to *Debug -> Attach to process...*, look for EasyCli process in *Available processes* list, click *Attach* and *voilà*, you are debugging your application. Now you can come back to your app, press any key to continue and debugger will pause execution on breakpoints!
 
 
 ### Remove debug flag in Release mode
